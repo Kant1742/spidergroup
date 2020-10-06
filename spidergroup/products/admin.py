@@ -2,21 +2,30 @@ from django.contrib import admin
 from .models import Product, Category, Company
 
 
-class ProductInline(admin.TabularInline):
-    model = Product
+class ProductCategoryInline(admin.TabularInline):
+    model = Product.category.through
     extra = 0
-    fiels = ('title',)
 
 
 @admin.register(Category)
 class Category(admin.ModelAdmin):
     model = Category
+    search_fields = ('title',)
+    inlines = [ProductCategoryInline]
 
 
 class CategoryInline(admin.TabularInline):
     model = Category
     extra = 0
-    fields = ('title', )
+    fields = ('title',)
+    list_display = ('title', 'product')
+    show_change_link = True
+
+
+class ProductInline(admin.TabularInline):
+    model = Product
+    extra = 0
+    fiels = ('title',)
     show_change_link = True
 
 
