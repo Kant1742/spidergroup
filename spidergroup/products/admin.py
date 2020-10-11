@@ -10,22 +10,22 @@ class ProductCategoryInline(admin.TabularInline):
 @admin.register(Category)
 class Category(admin.ModelAdmin):
     model = Category
-    search_fields = ('title',)
+    search_fields = ('name',)
     inlines = [ProductCategoryInline]
 
 
 class CategoryInline(admin.TabularInline):
     model = Category
     extra = 0
-    fields = ('title',)
-    list_display = ('title', 'product')
+    fields = ('name',)
+    list_display = ('name', 'product')
     show_change_link = True
 
 
 class ProductInline(admin.TabularInline):
     model = Product
     extra = 0
-    fiels = ('title',)
+    fiels = ('name',)
     show_change_link = True
 
 
@@ -38,8 +38,8 @@ class Company(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'company')
-    list_display_links = ('title',)
-    list_filter = ('title', 'company')
-    search_fields = ('title', 'id')
+    list_display = ('name', 'company')
+    list_display_links = ('name',)
+    list_filter = ('name', 'company')
+    search_fields = ('name', 'id')
     save_on_top = True

@@ -3,11 +3,11 @@ from rest_framework.routers import SimpleRouter
 from rest_framework.authtoken.views import obtain_auth_token
 
 
-from .views import ProductViewSet, CategoryViewSet, CompanyViewSet
+from .views import ProductViewSet, CategoryViewSet, CompanyViewSet, CompaniesListView, SingleCompanyView
 
 router = SimpleRouter()
 router.register('category', CategoryViewSet, basename='category')
-router.register('company', CompanyViewSet, basename='company')
+# router.register('company', CompanyViewSet, basename='company')
 router.register('', ProductViewSet, basename='product')
 
 
@@ -17,6 +17,7 @@ router.register('', ProductViewSet, basename='product')
 # ]
 
 urlpatterns = [
-    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('company/<int:pk>/', SingleCompanyView.as_view(), name='single-company'),
+    path('company/', CompaniesListView.as_view(), name='companies'),
     path('', include(router.urls)),
 ]
